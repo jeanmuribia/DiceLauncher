@@ -66,20 +66,10 @@ function resetDice() {
 
 function calculateOutcome(results) {
     let successes = results.filter((result, index) => {
-        if (selectedDice[index] === 'Malus' && result === 6) {
-            return true;  // Considère 6 comme une réussite pour le dé malus
-        }
-        return result >= 7;
+        return selectedDice[index] === 'Malus' ? result === 6 : result >= 7;
     }).length;
 
-    let failures = results.filter((result, index) => {
-        // Pour les dés autres que malus, 1 à 3 sont des échecs
-        if (selectedDice[index] !== 'Malus') {
-            return result <= 3;
-        }
-        // Pour le dé malus, seul 1 à 2 sont considérés comme échecs, puisque 6 est une réussite
-        return result <= 2;
-    }).length;
+    let failures = results.filter(result => result <= 3).length;
 
     let summaryElement = document.getElementById('summary');
     summaryElement.innerHTML = ''; // Efface le contenu précédent
