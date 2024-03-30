@@ -46,7 +46,7 @@ h1 {
     cursor: pointer;
   }
   
-  /* Exemple de style pour D6 */
+ 
   .d6 {
     background-image: url('dés/des-d6.png');
     background-size: cover;
@@ -75,6 +75,42 @@ h1 {
 .failure-icon {
     width: 30px; 
     height: 30px;
+}
+
+
+#button-container {
+  text-align: center; /* Centre les boutons à l'intérieur du conteneur */
+  padding: 20px; /* Ajoute un peu de padding autour des boutons si nécessaire */
+}
+
+.lancer-btn, .reset-btn {
+  padding: 15px 30px;
+  color: #333;
+  background-color: white;
+  font-size: 18px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 0 10px; /* Ajoute une marge à gauche et à droite de chaque bouton */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.lancer-btn:hover, .reset-btn:hover {
+  background-color: #eee;
+  transform: scale(1.05);
+}
+
+.lancer-btn:active, .reset-btn:active {
+  background-color: #ccc;
+  transform: scale(0.95);
+}
+
+.button:hover {
+  transform: scale(1.1); /* Légère augmentation de la taille au survol */
+}
+
+.button:active {
+  transform: scale(0.9); /* Rétrécissement lors du clic */
 }
 
 .shake-error {
