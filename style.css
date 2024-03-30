@@ -20,6 +20,7 @@ h1 {
   color: #333;
 }
 
+
 #dice-selection button {
   margin: 5px;
   padding: 10px;
@@ -29,52 +30,35 @@ h1 {
   margin-top: 15px;
 }
 
-
-.dice-btn {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    margin: 5px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10%;
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-    line-height: 60px;
-    cursor: pointer;
-  }
-  
- 
-  .d6 {
-    background-image: url('dés/des-d6.png');
-    background-size: cover;
-  }
-
-  .d8 {
-    background-image: url('dés/des-d8.png');
-    background-size: cover;
-  }
-
-  .d10 {
-    background-image: url('dés/des-d10.png');
-    background-size: cover;
-  }
-
-  .d12 {
-    background-image: url('dés/des-d12.png');
-    background-size: cover;
-  }
-  
-  .success-icon {
-    width: 30px; 
-    height: 30px;
+#dice-selection {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.failure-icon {
-    width: 30px; 
-    height: 30px;
+.dice-btn {
+  width: 5em; /* Largeur du bouton en em */
+  height: 5em; /* Hauteur du bouton en em, identique à la largeur pour assurer la forme carrée */
+  margin: 0.5em;
+  color: white;
+  font-size: 1em; /* Taille du texte adaptée */
+  background-color: #444;
+  border: 0.1em solid black; /* Bordure en em pour rester proportionnelle */
+  border-radius: 0.5em; /* Coins arrondis en em */
+  display: flex;
+  align-items: center; /* Centrage vertical du texte */
+  justify-content: center; /* Centrage horizontal du texte */
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.d6 { background-color: #1a53ff; }
+.d8 { background-color: #ffcc00; }
+.d10 { background-color: #4dff4d; }
+.d12 { background-color: #ff3333; }
+
+.dice-btn:hover {
+  transform: scale(1.1);
 }
 
 
@@ -127,4 +111,12 @@ h1 {
 @keyframes background-color-change {
   from { background-color: red; }
   to { background-color: white; }
+}
+
+
+.success-icon, .failure-icon {
+  width: 2em; /* Utilise em pour la taille, qui est relative à la taille de la police actuelle */
+  height: 2em; /* Garde le pictogramme carré */
+  display: inline-block; /* Pour que les icônes se placent correctement dans le flux de texte */
+  vertical-align: middle; /* Alignement vertical pour qu'ils s'alignent bien avec le texte */
 }

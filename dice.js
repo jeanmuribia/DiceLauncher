@@ -58,5 +58,9 @@ function calculateOutcome(results) {
         imgFailure.className = 'failure-icon'
         summaryElement.appendChild(imgFailure);
     }
+
+    // Affiche le nombre de réussites et d'échecs en bas
+    let resultsElement = document.getElementById('results');
+    resultsElement.innerText = `Réussites: ${successes}, Échecs: ${failures}`;
 }
 
