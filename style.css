@@ -1,0 +1,38 @@
+.dice-btn {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10%;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+  }
+  
+  /* Exemple de style pour D6 */
+  .d6 {
+    background-image: url('dés/des-d6.png');
+    background-size: cover;
+  }
+
+  .d8 {
+    background-image: url('dés/des-d8.png');
+    background-size: cover;
+  }
+
+  .d10 {
+    background-image: url('dés/des-d10.png');
+    background-size: cover;
+  }
+
+  .d12 {
+    background-image: url('dés/des-d12.png');
+    background-size: cover;
+  }
+  
+  
