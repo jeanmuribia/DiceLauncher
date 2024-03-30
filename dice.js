@@ -1,33 +1,63 @@
 let selectedDice = [];
 
 function addDie(sides) {
-
-   
-if (selectedDice.length >= 3) {
+    if (selectedDice.length >= 3) {
         let container = document.querySelector('.container');
         container.classList.add('shake-error');
         
-        // Supprime la classe après 1 seconde pour que l'animation puisse se rejouer
         setTimeout(() => {
             container.classList.remove('shake-error');
         }, 1000);
 
         return;
-}
-    selectedDice.push(sides);
+    }
+
+    let dieName;
+    switch (sides) {
+        case 6:
+            dieName = 'Malus';
+            break;
+        case 8:
+            dieName = 'Neutre';
+            break;
+        case 10:
+            dieName = 'Bonus';
+            break;
+        case 12:
+            dieName = 'Critique';
+            break;
+        default:
+            dieName = 'Inconnu'; // Au cas où
+            break;
+    }
+
+    selectedDice.push(dieName);
     document.getElementById('selected-dice').innerText = `Dés sélectionnés: ${selectedDice.join(', ')}`;
 }
 
 function rollDice() {
-    let results = selectedDice.map(sides => Math.ceil(Math.random() * sides));
+    let results = selectedDice.map(dieName => {
+        switch (dieName) {
+            case 'Malus':
+                return Math.ceil(Math.random() * 6);
+            case 'Neutre':
+                return Math.ceil(Math.random() * 8);
+            case 'Bonus':
+                return Math.ceil(Math.random() * 10);
+            case 'Critique':
+                return Math.ceil(Math.random() * 12);
+            default:
+                return 0; // Cas par défaut si nécessaire
+        }
+    });
+
     document.getElementById('results').innerText = `Résultats: ${results.join(', ')}`;
 
     calculateOutcome(results);
-   
 }
 
 function resetDice() {
-    selectedDice = []; // Efface la sélection de dés
+    selectedDice = [];
     document.getElementById('selected-dice').innerText = 'Dés sélectionnés:';
     document.getElementById('results').innerText = '';
     document.getElementById('summary').innerText = '';
@@ -35,8 +65,21 @@ function resetDice() {
 
 
 function calculateOutcome(results) {
-    let successes = results.filter(result => result >= 7).length;
-    let failures = results.filter(result => result <= 3).length;
+    let successes = results.filter((result, index) => {
+        if (selectedDice[index] === 'Malus' && result === 6) {
+            return true;  // Considère 6 comme une réussite pour le dé malus
+        }
+        return result >= 7;
+    }).length;
+
+    let failures = results.filter((result, index) => {
+        // Pour les dés autres que malus, 1 à 3 sont des échecs
+        if (selectedDice[index] !== 'Malus') {
+            return result <= 3;
+        }
+        // Pour le dé malus, seul 1 à 2 sont considérés comme échecs, puisque 6 est une réussite
+        return result <= 2;
+    }).length;
 
     let summaryElement = document.getElementById('summary');
     summaryElement.innerHTML = ''; // Efface le contenu précédent
@@ -44,7 +87,7 @@ function calculateOutcome(results) {
     // Ajoute les pictogrammes pour les réussites
     for (let i = 0; i < successes; i++) {
         let imgSuccess = document.createElement('img');
-        imgSuccess.src = 'dés/coche.png'; // Chemin vers l'image de réussite
+        imgSuccess.src = 'dés/coche.png'; // Assurez-vous du chemin
         imgSuccess.alt = 'Réussite';
         imgSuccess.className = 'success-icon';
         summaryElement.appendChild(imgSuccess);
@@ -53,14 +96,12 @@ function calculateOutcome(results) {
     // Ajoute les pictogrammes pour les échecs
     for (let i = 0; i < failures; i++) {
         let imgFailure = document.createElement('img');
-        imgFailure.src = 'dés/fermer.png'; // Chemin vers l'image d'échec
+        imgFailure.src = 'dés/fermer.png'; // Assurez-vous du chemin
         imgFailure.alt = 'Échec';
-        imgFailure.className = 'failure-icon'
+        imgFailure.className = 'failure-icon';
         summaryElement.appendChild(imgFailure);
     }
 
-    // Affiche le nombre de réussites et d'échecs en bas
-    let resultsElement = document.getElementById('results');
-    resultsElement.innerText = `Réussites: ${successes}, Échecs: ${failures}`;
+    document.getElementById('results').innerText = `Réussites: ${successes}, Échecs: ${failures}`;
 }
 
