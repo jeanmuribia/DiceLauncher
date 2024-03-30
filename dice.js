@@ -1,6 +1,19 @@
 let selectedDice = [];
 
 function addDie(sides) {
+
+   
+if (selectedDice.length >= 3) {
+        let container = document.querySelector('.container');
+        container.classList.add('shake-error');
+        
+        // Supprime la classe après 1 seconde pour que l'animation puisse se rejouer
+        setTimeout(() => {
+            container.classList.remove('shake-error');
+        }, 1000);
+
+        return;
+}
     selectedDice.push(sides);
     document.getElementById('selected-dice').innerText = `Dés sélectionnés: ${selectedDice.join(', ')}`;
 }
