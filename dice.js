@@ -77,7 +77,7 @@ function calculateOutcome(results) {
     // Ajoute les pictogrammes pour les réussites
     for (let i = 0; i < successes; i++) {
         let imgSuccess = document.createElement('img');
-        imgSuccess.src = 'dés/coche.png'; // Assurez-vous du chemin
+        imgSuccess.src = 'dés/coche.png';
         imgSuccess.alt = 'Réussite';
         imgSuccess.className = 'success-icon';
         summaryElement.appendChild(imgSuccess);
@@ -86,7 +86,7 @@ function calculateOutcome(results) {
     // Ajoute les pictogrammes pour les échecs
     for (let i = 0; i < failures; i++) {
         let imgFailure = document.createElement('img');
-        imgFailure.src = 'dés/fermer.png'; // Assurez-vous du chemin
+        imgFailure.src = 'dés/fermer.png';
         imgFailure.alt = 'Échec';
         imgFailure.className = 'failure-icon';
         summaryElement.appendChild(imgFailure);
